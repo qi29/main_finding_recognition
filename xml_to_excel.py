@@ -41,6 +41,7 @@ for article in articles:
         abstract=abstract+abstracttext.text+" "
     sheet1.write(title_abstract_num,2,abstract)
     title_abstract_num=title_abstract_num+1
+    print ("parsing article:"+str(PMID))
 
 # parse senencese in abstract, insert into xlsx
     sentences=nltk.sent_tokenize(abstract)

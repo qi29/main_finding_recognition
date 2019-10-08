@@ -23,6 +23,7 @@ for raw_num in range(0,len(raw_scores)):
     PMID=raw_scores['PMID'][raw_num]
     index=raw_scores['index'][raw_num]
     ID=raw_scores['ID'][raw_num]
+    print("scores normalization:"+str(ID))
     sentence=raw_scores['sentence'][raw_num]
     Word=raw_scores['Word'][raw_num]
     Similarity=raw_scores['Similarity'][raw_num]
@@ -80,6 +81,7 @@ for raw_num in range(0,len(raw_scores)):
             if raw_scores["Similarity"][MaxSimilarity_num]>=MaxSimilarity:
                 MaxSimilarity=raw_scores["Similarity"][MaxSimilarity_num]
     # insert normalization scores into csv
+    print "nomalization"+str(PMID)
     write_csv(PMID,index,ID,sentence,Word,Similarity,Pattern,BioSentStop,Distribution,LogNormalPattern,NormalSimilarityFixed,Distribution1,Distribution2,Distribution3,Distribution4,Distribution5,MaxNormalSimilarityFixed,MaxBioSentStop,NormalPattern,NormalWordFixed)
 
 

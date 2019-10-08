@@ -30,7 +30,7 @@ all_sentences_sheet=readworkbook("source_text.xls",1)
 # load sentences and positive scores from last step csv
 for source_num in range(1,source_text_sheet.nrows):
     PMID=source_text_sheet.cell(source_num,0).value
-    # print PMID
+    print ("predicting results:"+str(PMID))
     main_finding_ID_array=[]
     predicted_scores_ID_array=[]
     predicted_scores_array=[]

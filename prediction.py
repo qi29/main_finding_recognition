@@ -108,4 +108,5 @@ if len(testX3)>0:
 if len(testX5)>0:
     for num in range(0,len(clf5.predict_proba(testX5))):
         write_csv(test5pmcid[num],clf5.predict_proba(testX5)[num][1])
+        print ("training and predicting:"+str(test5pmcid[num]))
         # print str(test5pmcid[num])+','+str(clf5.predict_proba(testX5)[num][1])
