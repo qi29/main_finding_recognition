@@ -10,7 +10,7 @@ Required package:
                 fastText(0.9.1); (command)pip install fastText==0.9.1
                 sent2vec; unzip sent2vec-master.zip; run a make command; go into sent2vec-master folder run (command) pip install .
                 cython is required for sent2vec; (command) pip install Cython
-                scikit-learn (0.20.4);(command)pip install scikit-learn==0.20.4
+                scikit-learn (0.20.4);(command)pip install https://pypi.org/project/scikit-learn/0.20.4
                 pandas (0.24.0); (command)pip install pandas==0.24.0
                 Stanford Parser (Version 3.9.2): 1) Download Stanford Parser (Version 3.9.2) from https://nlp.stanford.edu/software/lex-parser.shtml#Download and put it inside the project folder 
                 Downloade BioSentVec model: BioSentVec_PubMed_MIMICIII-bigram_d700.bin from https://github.com/ncbi-nlp/BioSentVec and put it inside the project folder
