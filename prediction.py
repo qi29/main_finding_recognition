@@ -1,9 +1,14 @@
 import pandas as pd
 import csv
 from sklearn.svm import SVC
+import sys
+import os
+
+learning_scores=sys.argv[1]
+xmlfile=sys.argv[2]
 
 trainingdata=pd.read_csv('416training_data.csv')
-predictdata=pd.read_csv('learning_scores.csv')
+predictdata=pd.read_csv(learning_scores)
 
 # training
 trainingfeatures3=[]
@@ -86,14 +91,14 @@ for feature in testfeatures5:
     test5pmcid.append(feature[0])
 
 def create_csv():
-    path = "predicted_scores.csv"
+    path = xmlfile.replace(".xml","")+"_predicted_scores.csv"
     with open(path,'wb') as f:
         csv_write = csv.writer(f)
         csv_head = ["ID","predicted_score"]
         csv_write.writerow(csv_head)
 
 def write_csv(ID,predicted_score):
-    path  = "predicted_scores.csv"
+    path  = xmlfile.replace(".xml","")+"_predicted_scores.csv"
     with open(path,'a+') as f:
         csv_write = csv.writer(f)
         data_row = [ID,predicted_score]
@@ -110,3 +115,6 @@ if len(testX5)>0:
         write_csv(test5pmcid[num],clf5.predict_proba(testX5)[num][1])
         print ("training and predicting:"+str(test5pmcid[num]))
         # print str(test5pmcid[num])+','+str(clf5.predict_proba(testX5)[num][1])
+prediction_scores=xmlfile.replace(".xml","")+"_predicted_scores.csv"
+
+os.system("python main_finding_results.py %s %s" % (prediction_scores,xmlfile))

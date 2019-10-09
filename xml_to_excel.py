@@ -4,8 +4,10 @@ import xlrd
 import xlwt
 from xlwt import Workbook
 import nltk
+import sys
 
-
+# print str(sys.argv[1])
+inputxml=sys.argv[1]
 # create new xlsx
 Excel = Workbook(encoding='utf-8')
 # sheet1 title and abstract
@@ -22,7 +24,7 @@ sheet2.write(0,3,"sentence")
 
 
 # parse .xml (first input file:pubmed_result.xml)
-xml_file = "pubmed_result.xml"
+xml_file = inputxml
 content = open(xml_file).read()
 bs = BeautifulSoup(content, features="xml")
 articles=bs.findAll('PubmedArticle')
@@ -53,6 +55,6 @@ for article in articles:
         sheet2.write(all_sentences_num,3,sentence)
         all_sentences_num=all_sentences_num+1
         sentence_index=sentence_index+1
-
-Excel.save('source_text.xls')
-
+source_text=inputxml.replace(".xml","")+'_source_text.xls'
+Excel.save(source_text)
+os.system("python sentences_scoring_raw.py %s %s" % (source_text,inputxml))

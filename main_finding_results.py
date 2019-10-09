@@ -1,6 +1,8 @@
 import xlrd
 import pandas as pd
 import csv
+import os
+import sys
 
 def readworkbook(workbookname,i):
     workbook = xlrd.open_workbook(workbookname)
@@ -8,25 +10,31 @@ def readworkbook(workbookname,i):
     return sheet
 
 def create_csv():
-    path = "main_finding_results.csv"
+    path = xmlfile.replace(".xml","")+"_main_finding_results.csv"
     with open(path,'wb') as f:
         csv_write = csv.writer(f)
         csv_head = ["PMID","ID","main_finding"]
         csv_write.writerow(csv_head)
 
 def write_csv(PMID,ID,main_finding):
-    path  = "main_finding_results.csv"
+    path  = xmlfile.replace(".xml","")+"_main_finding_results.csv"
     with open(path,'a+') as f:
         csv_write = csv.writer(f)
         data_row = [PMID,ID,main_finding]
         csv_write.writerow(data_row)
 
 # create final output file
+prediction_scores=sys.argv[1]
+xmlfile=sys.argv[2]
+source_text=xmlfile.replace(".xml","")+"_source_text.xls"
+print (prediction_scores)
+print (xmlfile)
+print (source_text)
 create_csv()
 
-source_text_sheet=readworkbook("source_text.xls",0)
-predicted_scores=pd.read_csv('predicted_scores.csv')
-all_sentences_sheet=readworkbook("source_text.xls",1)
+source_text_sheet=readworkbook(source_text,0)
+predicted_scores=pd.read_csv(prediction_scores)
+all_sentences_sheet=readworkbook(source_text,1)
 # load sentences and positive scores from last step csv
 for source_num in range(1,source_text_sheet.nrows):
     PMID=source_text_sheet.cell(source_num,0).value

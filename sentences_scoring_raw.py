@@ -10,6 +10,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import re
 from nltk.parse import stanford
 from nltk.parse.stanford import StanfordDependencyParser
+import os
+import sys
 
 def readworkbook(workbookname,i):
     workbook = xlrd.open_workbook(workbookname)
@@ -17,26 +19,28 @@ def readworkbook(workbookname,i):
     return sheet
 
 def create_csv():
-    path = "raw_scores.csv"
+    path = xmlfile.replace(".xml","")+"_raw_scores.csv"
     with open(path,'wb') as f:
         csv_write = csv.writer(f)
         csv_head = ["PMID","index","ID","sentence","Word","Similarity","Pattern","BioSentStop","Distribution"]
         csv_write.writerow(csv_head)
 
 def write_csv(PMID,index,ID,sentence,Word,Similarity,Pattern,BioSentStop,Distribution):
-    path  = "raw_scores.csv"
+    path  = xmlfile.replace(".xml","")+"_raw_scores.csv"
     with open(path,'a+') as f:
         csv_write = csv.writer(f)
         data_row = [PMID,index,ID,sentence,Word,Similarity,Pattern,BioSentStop,Distribution]
         csv_write.writerow(data_row)
 
+
+# print str(sys.argv[1])
+source_text=sys.argv[1]
+xmlfile=sys.argv[2]
 create_csv()
+title_abstract_sheet=readworkbook(source_text,0)
+all_sentences_sheet=readworkbook(source_text,1)
 
-title_abstract_sheet=readworkbook("source_text.xls",0)
-all_sentences_sheet=readworkbook("source_text.xls",1)
-
-xml_file = "pubmed_result.xml"
-content = open(xml_file).read()
+content = open(xmlfile).read()
 bs = BeautifulSoup(content, features="xml")
 articles=bs.findAll('PubmedArticle')
 
@@ -209,3 +213,6 @@ while (num+1)<all_sentences_sheet.nrows:
     # insert all scores into csv
     write_csv(PMID,index,ID,sentence.encode("utf-8"),Word,Similarity,Pattern,BioSentStop,Distribution)
  
+raw_scores=xmlfile.replace(".xml","")+"_raw_scores.csv"
+
+os.system("python normalization.py %s %s" % (raw_scores,xmlfile))

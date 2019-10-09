@@ -1,23 +1,28 @@
 import csv
 import pandas as pd
 from math import log, exp
+import sys
+import os
+
+raw_scores=sys.argv[1]
+xmlfile=sys.argv[2]
 
 def create_csv():
-    path = "learning_scores.csv"
+    path = xmlfile.replace(".xml","")+"_learning_scores.csv"
     with open(path,'wb') as f:
         csv_write = csv.writer(f)
         csv_head = ["PMID","index","ID","sentence","Word","Similarity","Pattern","BioSentStop","Distribution","LogNormalPattern","NormalSimilarityFixed","Distribution1","Distribution2","Distribution3","Distribution4","Distribution5","MaxNormalSimilarityFixed","MaxBioSentStop","NormalPattern","NormalWordFixed"]
         csv_write.writerow(csv_head)
 
 def write_csv(PMID,index,ID,sentence,Word,Similarity,Pattern,BioSentStop,Distribution,LogNormalPattern,NormalSimilarityFixed,Distribution1,Distribution2,Distribution3,Distribution4,Distribution5,MaxNormalSimilarityFixed,MaxBioSentStop,NormalPattern,NormalWordFixed):
-    path  = "learning_scores.csv"
+    path  = xmlfile.replace(".xml","")+"_learning_scores.csv"
     with open(path,'a+') as f:
         csv_write = csv.writer(f)
         data_row = [PMID,index,ID,sentence,Word,Similarity,Pattern,BioSentStop,Distribution,LogNormalPattern,NormalSimilarityFixed,Distribution1,Distribution2,Distribution3,Distribution4,Distribution5,MaxNormalSimilarityFixed,MaxBioSentStop,NormalPattern,NormalWordFixed]
         csv_write.writerow(data_row)
 create_csv()
 
-raw_scores=pd.read_csv('raw_scores.csv')
+raw_scores=pd.read_csv(raw_scores)
 
 for raw_num in range(0,len(raw_scores)):
     PMID=raw_scores['PMID'][raw_num]
@@ -81,10 +86,10 @@ for raw_num in range(0,len(raw_scores)):
             if raw_scores["Similarity"][MaxSimilarity_num]>=MaxSimilarity:
                 MaxSimilarity=raw_scores["Similarity"][MaxSimilarity_num]
     # insert normalization scores into csv
-    print "nomalization"+str(PMID)
+    # print "nomalization"+str(PMID)
     write_csv(PMID,index,ID,sentence,Word,Similarity,Pattern,BioSentStop,Distribution,LogNormalPattern,NormalSimilarityFixed,Distribution1,Distribution2,Distribution3,Distribution4,Distribution5,MaxNormalSimilarityFixed,MaxBioSentStop,NormalPattern,NormalWordFixed)
-
-
+nomalization_scores=xmlfile.replace(".xml","")+"_learning_scores.csv"
+os.system("python prediction.py %s %s" % (nomalization_scores,xmlfile))
 
 
 
