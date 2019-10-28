@@ -1,3 +1,7 @@
+# Copyright 2019, University of Illinois at Chicago
+# This file is part of the main_finding_recognition project.
+# See the ReadMe.txt for licensing information.
+
 import os
 import sys
 # implemnet all *.py in below order
