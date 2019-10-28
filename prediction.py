@@ -1,3 +1,7 @@
+# Copyright 2019, University of Illinois at Chicago
+# This file is part of the main_finding_recognition project.
+# See the ReadMe.txt for licensing information.
+
 import pandas as pd
 import csv
 from sklearn.svm import SVC
