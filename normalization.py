@@ -1,3 +1,7 @@
+# Copyright 2019, University of Illinois at Chicago
+# This file is part of the main_finding_recognition project.
+# See the ReadMe.txt for licensing information.
+
 import csv
 import pandas as pd
 from math import log, exp
