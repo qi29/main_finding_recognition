@@ -29,7 +29,7 @@ Required package:
                 cython is required for sent2vec; (command) pip install Cython
                 scikit-learn (0.20.4);(command)pip install https://pypi.org/project/scikit-learn/0.20.4
                 pandas (0.24.0); (command)pip install pandas==0.24.0
-                Stanford Parser (Version 3.9.2): 1) Download Stanford Parser (Version 3.9.2) from https://nlp.stanford.edu/software/lex-parser.shtml#Download and put it inside the project folder 
+                Download Stanford Parser (Version 3.9.2): wget https://nlp.stanford.edu/software/stanford-parser-full-2018-10-17.zip; and unzip it inside the project folder
                 Download BioSentVec model: BioSentVec_PubMed_MIMICIII-bigram_d700.bin from https://github.com/ncbi-nlp/BioSentVec and put it inside the project folder
 implement from _main.py: python _main.py (your file name).xml, it will automatically implement all others *.py in order
 first input file is (your file name).xml downloaded from pubmed, and the Publication Type of articles in the .xml files should be Case Reports; final output file is main_finding_results.csv containing PMID, ID and main finding sentences.
