@@ -52,7 +52,7 @@ articles=bs.findAll('PubmedArticle')
 # load model
 model = sent2vec.Sent2vecModel()
 model.load_model('BioSentVec_PubMed_MIMICIII-bigram_d700.bin')
-dependencyparser=StanfordDependencyParser('stanfordnlp/stanford-parser-full-2018-10-17/stanford-parser.jar', 'stanfordnlp/stanford-parser-full-2018-10-17/stanford-parser-3.9.2-models.jar')
+dependencyparser=StanfordDependencyParser('stanford-parser-full-2018-10-17/stanford-parser.jar', 'stanford-parser-full-2018-10-17/stanford-parser-3.9.2-models.jar')
 
 # load all sentences from sheet
 num=0
