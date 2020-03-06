@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ===
 
-Require Python 2; Java JRE (Runtime Environment) 1.8; Linux or Mac System
+Require Python 2; Java JRE (Runtime Environment) 1.8; Linux System
 
 Required package: 
                 xlrd (1.2.0); (command)pip install xlrd==1.2.0
